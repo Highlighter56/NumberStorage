@@ -1,0 +1,17 @@
+# .vscode	: 	Why? Cause other users may not be on vscode, and then this folder is useless
+.vscode/
+
+# INCLUDE this file, becuase with it included, the project can be easily run from anywhere
+# lib folder
+# lib/
+
+# .txt  :  	Ill have this for now, but might remove this later
+directions.txt
+project_plan.txt
+
+# *.private	: 	This is to ignore any info I dont want public
+*.private
+# .private is just a convention, not a key work like in programing. So I still have to manualy ignore and lable files with it
+
+# Ingore the TrailPacker example Im basing this off of
+TrailPacker*

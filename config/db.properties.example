@@ -1,0 +1,4 @@
+# Example of how to set up your db.properties.private file
+db.url=jdbc:mysql://localhost:3306/DATABASE_NAME
+db.user=USERNAME
+db.password=PASSWORD
