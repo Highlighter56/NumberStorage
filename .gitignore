@@ -1,3 +1,6 @@
+# Ingore the TrailPacker example Im basing this off of
+TrailPacker*
+
 # .vscode	: 	Why? Cause other users may not be on vscode, and then this folder is useless
 .vscode/
 
@@ -13,5 +16,5 @@ project_plan.txt
 *.private
 # .private is just a convention, not a key work like in programing. So I still have to manualy ignore and lable files with it
 
-# Ingore the TrailPacker example Im basing this off of
-TrailPacker*
+# .class folders - this was only source code gets uploaded
+*.class
