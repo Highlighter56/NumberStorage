@@ -113,10 +113,10 @@ public class Main {
                 String command = input.getText();
                 input.setText("");
 
-                display.append("> " + command + "\n");
+                display.setText(grid+"> " + command + "\n");
             });
 
-			display.append(grid);
+			display.setText(grid);
 
             frame.setLayout(new BorderLayout());
             frame.add(new JScrollPane(display), BorderLayout.CENTER);
