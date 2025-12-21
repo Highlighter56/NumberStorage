@@ -11,23 +11,24 @@ import java.awt.event.FocusListener;
 public class Main {
 
 	// static String grid = 	"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
-	// 						"|     |     |     |     |     |     |     |     |\n"+
-	// 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n";
-
+	// 							"|     |     |     |     |     |     |     |     |\n"+
+	//							"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
+	//	 						"|     |     |     |     |     |     |     |     |\n"+
+	//	 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
+	//	 						"|     |     |     |     |     |     |     |     |\n"+
+	//	 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
+	//	 						"|     |     |     |     |     |     |     |     |\n"+
+	//	 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
+	//	 						"|     |     |     |     |     |     |     |     |\n"+
+	//	 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
+	//	 						"|     |     |     |     |     |     |     |     |\n"+
+	//	 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
+	//	 						"|     |     |     |     |     |     |     |     |\n"+
+	//	 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n"+
+	//	 						"|     |     |     |     |     |     |     |     |\n"+
+	//	 						"+-----+-----+-----+-----+-----+-----+-----+-----+\n";
+	
+	static String prompt;
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -60,7 +61,7 @@ public class Main {
 		SwingUtilities.invokeLater(() -> {
 
             JFrame frame = new JFrame("Mini Spreadsheet");
-            frame.setSize(590, 570);
+            frame.setSize(590, 580);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             // Display area
@@ -71,11 +72,11 @@ public class Main {
             display.setCaretColor(Color.WHITE);			// Caret color = color of the blinking line that tells you where you are typing
 			display.setMargin(new Insets(10, 10, 10, 10));
             display.setFont(new Font("Monospaced", Font.PLAIN, 18));
-			// Removes Scroll Bar Border
-			JScrollPane scrollPane = new JScrollPane(display);
-			scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-			// add(scrollPane, BorderLayout.CENTER);
+			// Removes Scroll Bar Border	--- TO DO
+			// JScrollPane scrollPane = new JScrollPane(display);
+			// scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        	// scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+			// // add(scrollPane, BorderLayout.CENTER);
 
             // Input field
             JTextField input = new JTextField("Insert Commands Here...");
@@ -88,7 +89,15 @@ public class Main {
 			Border margin = BorderFactory.createEmptyBorder(8, 8, 8, 8);
 			input.setBorder(BorderFactory.createCompoundBorder(outline, margin));
             input.setFont(new Font("Monospaced", Font.PLAIN, 18));
-
+			
+			// Set Starting Text
+			display.setText(grid);
+			// Border
+            frame.setLayout(new BorderLayout());
+            frame.add(new JScrollPane(display), BorderLayout.CENTER);
+            frame.add(input, BorderLayout.SOUTH);
+            frame.setVisible(true);
+			
 			// Prompt Text
 			input.addFocusListener(new FocusListener() {
 				@Override
@@ -103,26 +112,21 @@ public class Main {
 				public void focusLost(FocusEvent e) {
 					// If the field is empty when focus is lost, restore the prompt
 					if (input.getText().isEmpty()) {
-						input.setText("Insert Commands Here...");
+						input.setText("Insert Command Here...");
 					}
             	}
 			});
 
 			// Handle input
             input.addActionListener(e -> {
-                String command = input.getText();
-                input.setText("");
+				String command = input.getText();					// Read in command
+                input.setText("");								// Clear input field
+                display.setText(grid+"> " + command + "\n");		// Add prompt to Text Area
 
-                display.setText(grid+"> " + command + "\n");
+				
             });
-
-			display.setText(grid);
-
-            frame.setLayout(new BorderLayout());
-            frame.add(new JScrollPane(display), BorderLayout.CENTER);
-            frame.add(input, BorderLayout.SOUTH);
-
-            frame.setVisible(true);
         });
+
+		
 	}						
 }
