@@ -147,14 +147,14 @@ public class Main {
 				// set (1,1) to (2,2)
 				// set (1,1) to 5
 				if(command.length==4) {
-					// ***Resolve if its a A1 type of cord how do you find the cGrid positioning
 					if(isCord(command[1]) && command[2].equals("to"))
 						if(isCord(command[3])) {
 							setCordCord(command[1], command[3]);
 							return true;
-						} else if(isValidNum(command[3]))
+						} else if(isValidNum(command[3])) {
 							setCordNum(command[1], command[3]);
 							return true;
+						}
 				} else
 					error("Set Format");
 				break;
@@ -239,8 +239,13 @@ public class Main {
 						int temp2 = Integer.valueOf(cord.charAt(3)+"");
 						if(1<=temp1 && temp1<=8 && 1<=temp2 && temp2<=8)
 							return true;
+						else {
+							error("Cordinate x or y is out of Range");
+							return false;
+						}
 					}
 		}
+		error("Invalid Cordinate Syntax");
 		return false;
 	}
 	// EX: A1, B5
