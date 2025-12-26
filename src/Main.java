@@ -60,7 +60,7 @@ public class Main {
 		SwingUtilities.invokeLater(() -> {
 
             JFrame frame = new JFrame("Mini Spreadsheet");
-            frame.setSize(590, 580);
+            frame.setSize(610, 620);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             // Display area
@@ -258,13 +258,15 @@ public class Main {
 	}
 
 	public static String buildGrid() {
-		String s = "+-----+-----+-----+-----+-----+-----+-----+-----+\n";
+		String s = 	"     A     B     C     D     E     F     G     H\n"+
+					"  +-----+-----+-----+-----+-----+-----+-----+-----+\n";
 		for (int y = 1; y <= 8; y++) {
+			s = s + y+ " ";
 			for (int x = 1; x <= 8; x++) {
 				s = s + "|" + cGrid[x][y];
 			}
-			s = s + "|\n";
-			s = s + "+-----+-----+-----+-----+-----+-----+-----+-----+\n";
+			s = s + "|\n"+
+					"  +-----+-----+-----+-----+-----+-----+-----+-----+\n";
 		}
 		return s;
 	}

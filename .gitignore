@@ -9,8 +9,7 @@ TrailPacker*
 # lib/
 
 # .txt  :  	Ill have this for now, but might remove this later
-directions.txt
-project_plan.txt
+*.txt
 
 # *.private	: 	This is to ignore any info I dont want public
 *.private
