@@ -178,6 +178,18 @@ public class Main {
 				break;
 
 			case "sub":
+				// sub (1,1) and (2,1)
+				// sub (1,1) and 5
+				if(command.length==4) {
+					if(isCord(command[1]) && command[2].equals("and")) {
+						if(isCord(command[3])) {
+							return subCordCord(fc(command[1]), fc(command[3]));
+						} else if (isValidNum(command[3])) {
+							return subCordNum(fc(command[1]), command[3]);
+						}
+					}
+				} else
+					error("Sub Format");
 				break;
 
 			case "concat":
@@ -193,6 +205,33 @@ public class Main {
 			default:
 				System.out.println("Unreconigzed Command");
 				break;
+		}
+		return false;
+	}
+
+	public static boolean subCordCord(String main, String toAdd) {
+		if(isValidNum(cordToCell(main).getData()) && isValidNum(cordToCell(toAdd).getData())) {
+			if(isValidNum(Integer.valueOf(cordToCell(main).getData()) - Integer.valueOf(cordToCell(toAdd).getData()))) {
+				cordToCell(main).setData(Integer.valueOf(cordToCell(main).getData()) - Integer.valueOf(cordToCell(toAdd).getData()) + "");
+				return true;
+			} else {
+				error("Difference is too long to be stored in cell");
+			}
+		} else {
+			error("Can only subtract two numbers");
+		}
+		return false;
+	}
+	public static boolean subCordNum(String main, String toAdd) {
+		if(isValidNum(cordToCell(main).getData()) && isValidNum(toAdd)) {
+			if(isValidNum(Integer.valueOf(cordToCell(main).getData()) - Integer.valueOf(toAdd))) {
+				cordToCell(main).setData(Integer.valueOf(cordToCell(main).getData()) - Integer.valueOf(toAdd) + "");
+				return true;
+			} else {
+				error("Difference is too long to be stored in cell");
+			}
+		} else {
+			error("Can only subtract two numbers");
 		}
 		return false;
 	}
@@ -296,7 +335,7 @@ public class Main {
 		return false;
 	}
 
-	// f = format
+	// fc = Format Cord
 	// after checking if a string is a valid cord (ordered pair or cell reference), use this function to make it in the form of ordered pair (becuase the other functions rely on this form)
 	public static String fc(String cord) {
 		if(cord.length()==2) {
