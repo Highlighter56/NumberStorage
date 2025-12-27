@@ -170,7 +170,7 @@ public class Main {
 						if(isCord(command[3])) {
 							return addCordCord(command[1], command[3]);
 						} else if (isValidNum(command[3])) {
-
+							return addCordNum(command[1], command[3]);
 						}
 					}
 				} else
@@ -201,6 +201,19 @@ public class Main {
 		if(isValidNum(cordToCell(main).getData()) && isValidNum(cordToCell(toAdd).getData())) {
 			if(isValidNum(Integer.valueOf(cordToCell(main).getData()) + Integer.valueOf(cordToCell(toAdd).getData()))) {
 				cordToCell(main).setData(Integer.valueOf(cordToCell(main).getData()) + Integer.valueOf(cordToCell(toAdd).getData()) + "");
+				return true;
+			} else {
+				error("Sum is too long to be stored in cell");
+			}
+		} else {
+			error("Can only add two numbers");
+		}
+		return false;
+	}
+	public static boolean addCordNum(String main, String toAdd) {
+		if(isValidNum(cordToCell(main).getData()) && isValidNum(toAdd)) {
+			if(isValidNum(Integer.valueOf(cordToCell(main).getData()) + Integer.valueOf(toAdd))) {
+				cordToCell(main).setData(Integer.valueOf(cordToCell(main).getData()) + Integer.valueOf(toAdd) + "");
 				return true;
 			} else {
 				error("Sum is too long to be stored in cell");
