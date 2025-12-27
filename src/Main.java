@@ -163,6 +163,18 @@ public class Main {
 				break;
 
 			case "add":
+				// add (1,1) and (2,1)
+				// add (1,1) and 5
+				if(command.length==4) {
+					if(isCord(command[1]) && command[2].equals("and")) {
+						if(isCord(command[3])) {
+							return addCordCord(command[1], command[3]);
+						} else if (isValidNum(command[3])) {
+
+						}
+					}
+				} else
+					error("Add Format");
 				break;
 
 			case "sub":
@@ -178,17 +190,27 @@ public class Main {
 			case "func":
 				break;
 
-			case "t":
-				cGrid[1][1].setData(Integer.valueOf(cGrid[1][1].getData())+1+"");
-				System.out.println("t: "+cGrid[1][1].getData());
-				break;
-
 			default:
 				System.out.println("Unreconigzed Command");
 				break;
 		}
 		return false;
 	}
+
+	public static boolean addCordCord(String main, String toAdd) {
+		if(isValidNum(cordToCell(main).getData()) && isValidNum(cordToCell(toAdd).getData())) {
+			if(isValidNum(Integer.valueOf(cordToCell(main).getData()) + Integer.valueOf(cordToCell(toAdd).getData()))) {
+				cordToCell(main).setData(Integer.valueOf(cordToCell(main).getData()) + Integer.valueOf(cordToCell(toAdd).getData()) + "");
+				return true;
+			} else {
+				error("Sum is too long to be stored in cell");
+			}
+		} else {
+			error("Can only add two numbers");
+		}
+		return false;
+	}
+
 	public static Cell cordToCell(String s) {
 		return cGrid[Integer.valueOf(s.charAt(1)+"")][Integer.valueOf(s.charAt(3)+"")];
 	}
